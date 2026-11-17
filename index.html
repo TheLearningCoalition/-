@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Learning Coalition – Better Together.</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#0d0524;--card:#241255;--line:#4b33a0;--text:#f6f1ff;--mute:#bcaef2;--gold:#ffd447;--mx:0;--my:0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;font-family:Fredoka,"Trebuchet MS",system-ui,sans-serif;color:var(--text);background:radial-gradient(ellipse at 50% -10%,#3a1d8a,var(--bg) 65%) fixed;background-color:var(--bg);overflow-x:hidden}
+body.lock{overflow:hidden}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.glow{position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;background:radial-gradient(#8b5cf655,transparent 65%);pointer-events:none;z-index:1;opacity:0;transition:opacity .4s}
+@media (hover:none){.glow{display:none}}
+.planet{position:fixed;border-radius:50%;z-index:0;pointer-events:none;transform:translate(calc(var(--mx)*-24px),calc(var(--my)*-24px));transition:transform .3s}
+.p1{width:220px;height:220px;right:-70px;top:90px;background:radial-gradient(circle at 30% 30%,#a98bff,#4a2cb0 55%,#1a0a4a);opacity:.5;animation:fl 9s ease-in-out infinite}
+.p2{width:140px;height:140px;left:-40px;bottom:12%;background:radial-gradient(circle at 30% 30%,#ff9ad0,#a02fa0 55%,#2a0a4a);opacity:.4;animation:fl 11s ease-in-out infinite reverse}
+@keyframes fl{50%{margin-top:-18px}}
+/* intro */
+#intro{position:fixed;inset:0;z-index:100;background:radial-gradient(circle,#34187a,#0a031c 75%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:opacity .9s,transform .9s,visibility .9s;cursor:pointer}
+#intro.out{opacity:0;transform:scale(1.5);visibility:hidden}
+#intro svg{width:min(300px,68vw);height:auto;overflow:visible;filter:drop-shadow(0 0 30px #8b5cf6)}
+.wel{display:flex;font-size:clamp(2.6rem,12vw,6.5rem);font-weight:700;letter-spacing:.06em;margin-top:6px}
+.wel span{opacity:0;display:inline-block;animation:pop .7s cubic-bezier(.3,1.7,.5,1) forwards;animation-delay:calc(1.7s + var(--i)*.1s);text-shadow:0 0 24px currentColor}
+.to{opacity:0;letter-spacing:.3em;color:var(--mute);font-weight:600;animation:fade .8s 2.9s forwards}
+.to b{display:block;color:#fff;font-size:1.3em;letter-spacing:.12em;margin-top:6px;animation:shim 3s linear infinite}
+.skip{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));color:var(--mute);font-size:.85rem;letter-spacing:.2em;opacity:.7}
+@keyframes pop{from{opacity:0;transform:translateY(60px) scale(.3) rotate(-25deg)}to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+@keyframes fly{from{transform:translate(var(--dx),var(--dy)) scale(0) rotate(240deg);opacity:0}60%{opacity:1}to{transform:none;opacity:1}}
+@keyframes bob{50%{transform:translateY(-5px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes dash{to{stroke-dashoffset:-400}}
+@keyframes shim{to{background-position:200% 0}}
+.fly{animation:fly 1s cubic-bezier(.2,1.2,.4,1) backwards}
+.bob{animation:bob 3.4s ease-in-out infinite}
+.orbg{cursor:pointer}
+.star{transform-origin:100px 100px;animation:spin 14s linear infinite}
+/* layout */
+nav{display:flex;justify-content:space-between;align-items:center;max-width:1040px;margin:0 auto;padding:18px 20px;position:relative;z-index:3}
+nav b{letter-spacing:.14em;font-size:.9rem}
+nav a{color:var(--mute);text-decoration:none;margin-left:18px;font-weight:600}
+nav a:hover{color:#fff}
+main{position:relative;z-index:2;max-width:1040px;margin:0 auto;padding:0 20px 40px}
+.hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:34px;padding:24px 0 50px;text-align:center;min-height:78vh}
+.hero svg{width:min(340px,82vw);height:auto;overflow:visible;filter:drop-shadow(0 0 35px #8b5cf6bb)}
+.ring{stroke-dasharray:140 260;animation:dash 4s linear infinite}
+.hero small{display:block;letter-spacing:.4em;color:var(--mute);font-weight:600}
+h1{margin:2px 0 8px;font-size:clamp(2.8rem,10vw,5.6rem);line-height:1;font-style:italic;font-weight:700;background:linear-gradient(90deg,#fff,#c9b8ff,#ffd447,#c9b8ff,#fff);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 5s linear infinite;filter:drop-shadow(0 4px 18px #7c3ae088)}
+.bar{height:9px;border-radius:9px;background:linear-gradient(90deg,#e0344b 0 16.6%,#f08a24 0 33.3%,#f7cf2e 0 50%,#2fb54a 0 66.6%,#2f86e8 0 83.3%,#7c3ae0 0);box-shadow:0 0 20px #fff3;transform-origin:left;transform:scaleX(0);transition:transform 1.2s .4s cubic-bezier(.2,1,.3,1)}
+.in .bar,.bar.in{transform:none}
+.tag{letter-spacing:.3em;font-weight:600;color:var(--mute);margin:12px 0}
+.type{font-size:1.25rem;min-height:1.6em;color:#fff}
+.type i{color:var(--gold);font-style:normal}
+.type em{display:inline-block;width:2px;height:1em;background:var(--gold);vertical-align:-.15em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;font-weight:700;font-size:1rem;text-decoration:none;color:#1a0b45;background:var(--gold);box-shadow:0 5px 0 #b88b00,0 0 30px #ffd44755;transition:transform .15s;position:relative}
+.btn:hover{transform:translateY(-4px) scale(1.04)}
+.btn.alt{background:transparent;color:var(--text);box-shadow:inset 0 0 0 2px #7b5fd6}
+.btn.dc{background:#5865f2;color:#fff;box-shadow:0 5px 0 #3a44b8,0 0 40px #5865f2aa;animation:pulse 2.2s ease-in-out infinite;font-size:1.15rem;padding:17px 34px}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.marq{overflow:hidden;border-block:2px solid var(--line);background:#1a0c4455;margin:10px -20px;white-space:nowrap}
+.marq div{display:inline-block;padding:14px 0;font-weight:700;letter-spacing:.2em;color:var(--mute);animation:mq 28s linear infinite}
+.marq span{margin:0 22px}
+@keyframes mq{to{transform:translateX(-50%)}}
+h2{text-align:center;font-size:clamp(1.8rem,5.5vw,2.6rem);margin:64px 0 8px}
+.sub{text-align:center;color:var(--mute);max-width:620px;margin:0 auto 28px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:linear-gradient(160deg,#2f1a6d,var(--card));border:2px solid var(--line);border-radius:24px;padding:26px;transition:transform .2s,border-color .3s,box-shadow .3s;position:relative}
+.card:hover{border-color:var(--c,#7b5fd6);box-shadow:0 0 36px -6px var(--c,#7b5fd6)}
+.card .ic{font-size:2.2rem;margin-bottom:6px}
+.card h3{margin:0 0 6px;font-size:1.3rem;color:var(--c,#fff)}
+.card p{margin:0;color:var(--mute);line-height:1.55}
+.card a{color:inherit;text-decoration:none;display:block}
+.num{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:1.3rem;color:#1a0b45;background:var(--c);box-shadow:0 0 22px var(--c);margin-bottom:10px}
+.crew{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.crew i{width:16px;height:16px;border-radius:50%;background:var(--c);box-shadow:0 0 14px var(--c);animation:bob 2s ease-in-out infinite;animation-delay:var(--d)}
+.contact{margin-top:64px;text-align:center;background:radial-gradient(circle at 50% 0,#5b3bd0,#2b1a63 70%);border:2px solid #6a4ee0;border-radius:30px;padding:46px 20px;box-shadow:0 0 70px -20px #8b5cf6}
+.contact h2{margin-top:0}
+footer{text-align:center;color:var(--mute);padding:34px 20px;position:relative;z-index:2;font-size:.9rem}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body class="lock">
+<canvas id="sky"></canvas><div class="glow" id="glow"></div><div class="planet p1"></div><div class="planet p2"></div>
+
+<div id="intro">
+<svg id="introLogo" viewBox="-20 -10 240 220" aria-hidden="true"></svg>
+<div class="wel" id="wel" aria-label="Welcome"></div>
+<div class="to">TO<b>THE LEARNING COALITION</b></div>
+<div class="skip">TAP TO SKIP</div>
+</div>
+
+<nav><b>✦ THE LEARNING COALITION</b><div><a href="#about">About</a><a href="#watch">Watch</a><a href="#contact">Contact</a></div></nav>
+<main>
+<section class="hero">
+<svg id="logo" viewBox="-20 -10 240 220" role="img" aria-label="The Learning Coalition logo: six smiling orbs around a star"></svg>
+<div>
+<small class="rv">THE LEARNING</small>
+<h1 class="rv">COALITION</h1>
+<div class="bar rv" style="opacity:1;transform:scaleX(0)"></div>
+<p class="tag rv">BETTER TOGETHER.</p>
+<div class="type rv">We make animated shorts so you can <i id="tw"></i><em></em></div>
+<div class="btns rv"><a class="btn" href="#watch">▶ Watch our shorts</a><a class="btn alt" href="#contact">Contact us</a></div>
+</div>
+</section>
+
+<div class="marq"><div id="mq"></div></div>
+
+<section id="about">
+<h2 class="rv">What we do</h2>
+<p class="sub rv">We’re a team that makes animated videos to help people learn. Short, fun and easy to remember, so learning feels like play.</p>
+<div class="grid">
+<div class="card rv" style="--c:#ff5a6e"><div class="ic">🎬</div><h3>Animated shorts</h3><p>Bite-sized animated videos that explain ideas fast and keep you watching.</p></div>
+<div class="card rv" style="--c:#ffd447"><div class="ic">💡</div><h3>Learn anything</h3><p>Big topics broken into simple, colorful lessons anyone can follow.</p></div>
+<div class="card rv" style="--c:#58d06f"><div class="ic">🤝</div><h3>Better together</h3><p>A coalition of creators, each bringing their own color to the lesson.</p></div>
+</div>
+</section>
+
+<section>
+<h2 class="rv">How it works</h2>
+<div class="grid">
+<div class="card rv" style="--c:#6bb8ff"><div class="num">1</div><h3>Pick a topic</h3><p>Find something you’re curious about in our latest shorts.</p></div>
+<div class="card rv" style="--c:#b98cff"><div class="num">2</div><h3>Watch a short</h3><p>A quick animated lesson. No boring lectures, promise.</p></div>
+<div class="card rv" style="--c:#ffa94d"><div class="num">3</div><h3>Remember it</h3><p>Fun visuals and characters make it stick in your brain.</p></div>
+</div>
+</section>
+
+<section id="watch">
+<h2 class="rv">Watch &amp; follow</h2>
+<p class="sub rv">These are our only official accounts, as of right now. Watch out for lookalikes!</p>
+<div class="grid">
+<div class="card rv" style="--c:#2fe0e0"><a href="https://www.tiktok.com/@the.learning.coal" target="_blank" rel="noopener"><div class="ic">🎵</div><h3>TikTok</h3><p>@the.learning.coal<br>Daily short videos. Tap to follow →</p></a></div>
+<div class="card rv" style="--c:#ff4d4d"><a href="https://youtube.com/@learnwiththecoalition" target="_blank" rel="noopener"><div class="ic">▶️</div><h3>YouTube</h3><p>@learnwiththecoalition<br>Our shorts and more. Tap to subscribe →</p></a></div>
+</div>
+</section>
+
+<section id="contact" class="contact rv">
+<h2>Contact us</h2>
+<p class="sub">Questions, ideas or want to join the coalition? Hop into our Discord server and say hi!</p>
+<a class="btn dc" href="https://discord.gg/28TpGNXhsD" target="_blank" rel="noopener">💬 Join our Discord</a>
+<div class="crew" style="margin-top:26px" id="crew"></div>
+</section>
+</main>
+<footer>© The Learning Coalition · Better together.</footer>
+
+<script>
+(function(){
+var C=[["#ff6b7a","#c4162f"],["#ffa94d","#d9650a"],["#ffe066","#d9a400"],["#6fe08a","#1e9a3d"],["#6bb8ff","#1f63c9"],["#b98cff","#6a2fd0"]];
+var P=[[100,32],[159,66],[159,134],[100,168],[41,134],[41,66]];
+function logo(el,k,fly){
+var s='<defs>';
+C.forEach(function(c,i){s+='<radialGradient id="'+k+i+'" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="'+c[0]+'"/><stop offset="1" stop-color="'+c[1]+'"/></radialGradient>'});
+s+='<linearGradient id="'+k+'r"><stop offset="0" stop-color="#ffd447"/><stop offset="1" stop-color="#ff9ad0"/></linearGradient></defs>';
+s+='<circle cx="100" cy="100" r="92" fill="#7b5fd6" opacity=".5"/><polygon points="'+P.map(function(p){return p.join(",")}).join(" ")+'" fill="none" stroke="#e4d9ff" stroke-width="6" stroke-linejoin="round" opacity=".55"/>';
+s+='<g transform="rotate(-18 100 100)"><ellipse class="ring" cx="100" cy="100" rx="112" ry="38" fill="none" stroke="url(#'+k+'r)" stroke-width="3" stroke-linecap="round"/></g>';
+s+='<g class="star"><polygon fill="#ffd447" points="100,62 107,88 130,76 112,95 138,100 112,107 126,130 105,114 100,140 95,114 74,130 88,107 62,100 88,95 70,76 93,88"/></g><circle cx="100" cy="100" r="7" fill="#fff"/>';
+P.forEach(function(p,i){
+var a=Math.random()*6.28,d=300+Math.random()*100;
+s+='<g class="orbg" data-c="'+C[i][0]+'"><g'+(fly?' class="fly" style="--dx:'+Math.round(Math.cos(a)*d)+'px;--dy:'+Math.round(Math.sin(a)*d)+'px;animation-delay:'+(i*.14)+'s"':'')+'><g class="bob" style="animation-delay:-'+(i*.6)+'s"><g transform="translate('+p[0]+' '+p[1]+')"><circle r="21" fill="url(#'+k+i+')"/><ellipse cx="-8" cy="-13" rx="6" ry="3.5" fill="#fff" opacity=".45"/><circle cx="-7" cy="-2" r="5" fill="#fff"/><circle cx="7" cy="-2" r="5" fill="#fff"/><circle class="pu" cx="-7" cy="-1" r="2.7" fill="#1a0b45"/><circle class="pu" cx="7" cy="-1" r="2.7" fill="#1a0b45"/><path d="M-7 8Q0 14 7 8" stroke="#1a0b45" stroke-width="2" fill="none" stroke-linecap="round"/></g></g></g></g>';
+});
+el.innerHTML=s}
+logo(document.getElementById("introLogo"),"i",true);
+logo(document.getElementById("logo"),"h",false);
+var wel=document.getElementById("wel");
+"WELCOME".split("").forEach(function(ch,i){var e=document.createElement("span");e.textContent=ch;e.style.setProperty("--i",i);e.style.color=C[i%6][0];wel.appendChild(e)});
+var mq=document.getElementById("mq"),t="ANIMATED SHORTS ✦ LEARN ANYTHING ✦ BETTER TOGETHER ✦ FUN LESSONS ✦ ";
+mq.innerHTML=("<span>"+t+"</span>").repeat(8);
+var crew=document.getElementById("crew");
+C.forEach(function(c,i){var e=document.createElement("i");e.style.setProperty("--c",c[0]);e.style.setProperty("--d",(i*.2)+"s");crew.appendChild(e)});
+
+/* sky */
+var cv=document.getElementById("sky"),cx=cv.getContext("2d"),W,H,S=[],sh=null;
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;S=[];for(var i=0;i<Math.min(170,W/6);i++)S.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.3,p:Math.random()*6.28,v:Math.random()*.15+.03})}
+rs();addEventListener("resize",rs);
+(function loop(t){cx.clearRect(0,0,W,H);
+S.forEach(function(s){s.y+=s.v;if(s.y>H)s.y=0;cx.globalAlpha=.4+.6*Math.abs(Math.sin(t/900+s.p));cx.fillStyle="#fff";cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.28);cx.fill()});
+if(!sh&&Math.random()<.004)sh={x:Math.random()*W,y:Math.random()*H*.4,l:0};
+if(sh){sh.x+=9;sh.y+=4;sh.l++;cx.globalAlpha=1-sh.l/40;cx.strokeStyle="#ffd447";cx.lineWidth=2;cx.beginPath();cx.moveTo(sh.x,sh.y);cx.lineTo(sh.x-60,sh.y-26);cx.stroke();if(sh.l>40)sh=null}
+requestAnimationFrame(loop)})(0);
+
+/* pointer */
+var mx=innerWidth/2,my=innerHeight/2,q=false,gl=document.getElementById("glow");
+function upd(){q=false;
+document.documentElement.style.setProperty("--mx",(mx/innerWidth-.5)*2);document.documentElement.style.setProperty("--my",(my/innerHeight-.5)*2);
+gl.style.transform="translate("+mx+"px,"+my+"px)";gl.style.opacity=1;
+document.querySelectorAll(".pu").forEach(function(p){var r=p.parentNode.getBoundingClientRect();if(!r.width)return;var dx=mx-(r.left+r.width/2),dy=my-(r.top+r.height/2),d=Math.min(1.9,Math.hypot(dx,dy)/70),a=Math.atan2(dy,dx);p.style.transform="translate("+(Math.cos(a)*d)+"px,"+(Math.sin(a)*d)+"px)"})}
+addEventListener("pointermove",function(e){mx=e.clientX;my=e.clientY;if(!q){q=true;requestAnimationFrame(upd)}});
+function burst(x,y,c){for(var i=0;i<14;i++){var e=document.createElement("span"),a=Math.random()*6.28,d=50+Math.random()*80;e.textContent="✦";e.style.cssText="position:fixed;z-index:200;pointer-events:none;left:"+x+"px;top:"+y+"px;color:"+(i%3?c:"#ffd447")+";font-size:"+(10+Math.random()*14)+"px";document.body.appendChild(e);e.animate([{transform:"translate(0,0) scale(1) rotate(0)",opacity:1},{transform:"translate("+Math.cos(a)*d+"px,"+Math.sin(a)*d+"px) scale(0) rotate(240deg)",opacity:0}],{duration:800,easing:"ease-out"}).onfinish=function(){this.effect.target.remove()}}}
+document.addEventListener("click",function(e){var g=e.target.closest&&e.target.closest(".orbg");if(g)burst(e.clientX,e.clientY,g.dataset.c)});
+document.querySelectorAll(".card").forEach(function(c){c.addEventListener("pointermove",function(e){var r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;c.style.transform="perspective(700px) rotateY("+px*12+"deg) rotateX("+(-py*12)+"deg) translateY(-5px)"});c.addEventListener("pointerleave",function(){c.style.transform=""})});
+
+/* typewriter */
+var W2=["learn faster.","remember more.","have fun learning.","learn together."],wi=0,ci=0,del=false,tw=document.getElementById("tw");
+(function ty(){var w=W2[wi];ci+=del?-1:1;tw.textContent=w.slice(0,ci);var n=del?40:85;if(!del&&ci==w.length){del=true;n=1500}else if(del&&ci==0){del=false;wi=(wi+1)%W2.length;n=300}setTimeout(ty,n)})();
+
+/* intro */
+var intro=document.getElementById("intro"),done=false;
+function go(){if(done)return;done=true;intro.classList.add("out");document.body.classList.remove("lock");
+setTimeout(function(){intro.remove()},1000);
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll(".rv").forEach(function(el,i){setTimeout(function(){io.observe(el)},i<6?i*120:0)})}
+intro.addEventListener("click",go);
+setTimeout(go,matchMedia("(prefers-reduced-motion:reduce)").matches?0:4800);
+})();
+</script>
+</body>
+</html>
